@@ -1,0 +1,124 @@
+<body [class]="darkMode ? 'dark' : ''">
+<!-- SIDEBAR -->
+<section id="sidebar" [ngClass]="status ? 'hideSide' : ''">
+  <a class="brand" routerLink="/Dashboard/Profile">
+    <img
+      [src]="LogoImgPath"
+      [class]="status ? 'imgCollapsed' : 'imgNotCollapsed'"
+      alt="Company Logo"
+      loading="lazy"
+      />
+  </a>
+  <ul class="side-menu top">
+    <li routerLink="/Dashboard/cvae" routerLinkActive="active">
+      <a>
+          <span class="text item-list-dash"
+          ><mat-icon>dashboard</mat-icon
+          ><span class="item-list-dash">CVAE</span></span
+          >
+      </a>
+    </li>
+    <li
+
+      routerLink="/Dashboard/cfe"
+      routerLinkActive="active"
+    >
+      <a>
+          <span class="text item-list-dash"
+          ><mat-icon>people</mat-icon
+          ><span class="item-list-dash">CFE</span></span
+          >
+      </a>
+    </li>
+    <li
+
+      routerLink="/Dashboard/tva"
+      routerLinkActive="active"
+    >
+      <a>
+          <span class="text item-list-dash"
+          ><mat-icon>key</mat-icon
+          ><span class="item-list-dash">TVA</span></span
+          >
+      </a>
+    </li>
+
+    <li
+
+      routerLink="/Dashboard/transaction"
+      routerLinkActive="active"
+    >
+      <a>
+          <span class="text item-list-dash"
+          ><mat-icon>key</mat-icon
+          ><span class="item-list-dash">Transactions</span></span
+          >
+      </a>
+    </li>
+
+    <li
+
+      routerLink="/Dashboard/historique"
+      routerLinkActive="active"
+    >
+      <a>
+          <span class="text item-list-dash"
+          ><mat-icon>key</mat-icon
+          ><span class="item-list-dash">Historique</span></span
+          >
+      </a>
+    </li>
+  </ul>
+  <ul class="side-menu">
+    <li routerLink="/Dashboard/Profile" routerLinkActive="active">
+      <a>
+          <span class="text item-list-dash"
+          ><mat-icon>account_circle</mat-icon
+          ><span class="item-list-dash">Profil</span></span
+          >
+      </a>
+    </li>
+    <li>
+      <a
+        routerLink="/SignIn"
+        title="logout"
+        (click)="signOut()"
+        class="logout"
+      >
+          <span class="text item-list-dash"
+          ><mat-icon>input</mat-icon
+          ><span class="item-list-dash">Deconnexion</span></span
+          >
+      </a>
+    </li>
+  </ul>
+</section>
+<!-- SIDEBAR -->
+
+<!-- CONTENT -->
+<section id="content">
+  <!-- NAVBAR -->
+  <nav>
+    <i (click)="addToggle()" class="bx bx-menu"
+    ><mat-icon>reorder</mat-icon></i
+    >
+    <form></form>
+    <a aria-disabled="true" class="profile" routerLink="/Dashboard/Profile">
+      <img [src]="imageProfile" alt="user Image Profile"/>
+      {{ userData.lastName + ' ' + userData.firstName}}
+    </a>
+    <label class="switch">
+      <input type="checkbox" [checked]="darkMode" (change)="modeChanges()" />
+      <span class="slider"></span>
+    </label>
+  </nav>
+  <!-- NAVBAR -->
+
+  <!-- MAIN -->
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+  <!-- MAIN -->
+</section>
+<!-- CONTENT -->
+</body>

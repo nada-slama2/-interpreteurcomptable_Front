@@ -1,0 +1,27 @@
+<div class="container">
+  <h1>Transaction Management</h1>
+  <select [(ngModel)]="selectedTransactionId" (change)="selectTransaction()">
+    <option *ngFor="let transaction of transactions" [value]="transaction.id">{{ transaction.endDate |date}}</option>
+  </select>
+  <input type="button" value="Add New Transaction" class="btn btn-info" (click)="addNewTransaction()">
+  <input *ngIf="addMode || editMode" type="button" value="Save Changes" class="btn btn-success" (click)="saveOrUpdateTransaction()">
+  <input *ngIf="addMode || editMode" type="button" value="Cancel" class="btn btn-warning" (click)="cancelEdit()">
+  <input *ngIf="!addMode && !editMode && selectedTransactionId" type="button" value="Edit" class="btn btn-primary" (click)="editMode=true">
+  <input *ngIf="selectedTransactionId" type="button" value="Delete" class="btn btn-danger" (click)="deleteTransaction()">
+  <br><br>
+  <div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Start Date: <span *ngIf="!editMode && !addMode">{{ transaction.startDate | date: 'yyyy-MM-dd' }}</span><input *ngIf="editMode || addMode" type="date" [(ngModel)]="transaction.startDate"></li>
+      <li class="list-group-item">End Date: <span *ngIf="!editMode && !addMode">{{ transaction.endDate | date: 'yyyy-MM-dd' }}</span><input *ngIf="editMode || addMode" type="date" [(ngModel)]="transaction.endDate"></li>
+      <li class="list-group-item">Description: <span *ngIf="!editMode && !addMode">{{ transaction.description }}</span><input *ngIf="editMode || addMode" type="text" [(ngModel)]="transaction.description"></li>
+      <li class="list-group-item">Account Number: <span *ngIf="!editMode && !addMode">{{ transaction.accountNumber }}</span><input *ngIf="editMode || addMode" type="text" [(ngModel)]="transaction.accountNumber"></li>
+      <li class="list-group-item">Amount: <span *ngIf="!editMode && !addMode">{{ transaction.amount }}</span><input *ngIf="editMode || addMode" type="number" [(ngModel)]="transaction.amount"></li>
+      <li class="list-group-item">Type: <span *ngIf="!editMode && !addMode">{{ transaction.type }}</span><input *ngIf="editMode || addMode" type="text" [(ngModel)]="transaction.type"></li>
+      <li class="list-group-item">Status: <span *ngIf="!editMode && !addMode">{{ transaction.status }}</span><input *ngIf="editMode || addMode" type="text" [(ngModel)]="transaction.status"></li>
+      <li class="list-group-item">Details: <span *ngIf="!editMode && !addMode">{{ transaction.details }}</span><input *ngIf="editMode || addMode" type="text" [(ngModel)]="transaction.details"></li>
+      <li class="list-group-item">Pending: <span *ngIf="!editMode && !addMode">{{ transaction.pending }}</span><input *ngIf="editMode || addMode" type="text" [(ngModel)]="transaction.pending"></li>
+      <li class="list-group-item">Fee: <span *ngIf="!editMode && !addMode">{{ transaction.fee }}</span><input *ngIf="editMode || addMode" type="number" [(ngModel)]="transaction.fee"></li>
+      <li class="list-group-item">Remarks: <span *ngIf="!editMode && !addMode">{{ transaction.remarks }}</span><input *ngIf="editMode || addMode" type="text" [(ngModel)]="transaction.remarks"></li>
+    </ul>
+  </div>
+</div>

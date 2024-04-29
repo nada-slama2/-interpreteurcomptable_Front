@@ -1,0 +1,228 @@
+<div
+  class="container"
+  [class.right-panel-active]="active === 'right-panel-active'"
+  id="container"
+>
+  <!-- Sign up form container -->
+  <div class="form-container sign-up-container">
+    <form [formGroup]="formSubs" (ngSubmit)="onSubmitSubs()">
+      <!-- Social container -->
+      <div class="social-container">
+        <img src="../../../assets/Logo.png" height="70px" />
+      </div>
+
+      <!-- Nom input -->
+      <mat-form-field class="form-group">
+        <mat-label class="form-label" for="firstName">
+          <i class="me-3"><mat-icon>profile</mat-icon></i> first Name
+        </mat-label>
+        <input
+          matInput
+          type="text"
+          id="firstName"
+          formControlName="firstName"
+          [errorStateMatcher]="matcher"
+          name="firstName"
+          required
+        />
+        <mat-error *ngIf="firstName?.hasError('required')"
+        >first Name is <strong>required</strong></mat-error
+        >
+      </mat-form-field>
+
+      <!-- lastName input -->
+      <mat-form-field class="form-group">
+        <mat-label class="form-label" for="lastName">
+          <i class="me-3"><mat-icon>profile</mat-icon></i> last Name
+        </mat-label>
+        <input
+          matInput
+          type="text"
+          id="lastName"
+          formControlName="lastName"
+          [errorStateMatcher]="matcher"
+          name="lastName"
+          required
+        />
+        <mat-error *ngIf="lastName?.hasError('required')"
+        >last Name is <strong>required</strong></mat-error
+        >
+      </mat-form-field>
+
+      <!-- Email input -->
+      <mat-form-field class="form-group">
+        <mat-label class="form-label" for="EmailSubs">
+          <i class="me-3"><mat-icon>email</mat-icon></i> Email address
+        </mat-label>
+        <input
+          matInput
+          type="email"
+          id="emailSubs"
+          formControlName="emailSubs"
+          [errorStateMatcher]="matcher"
+          name="emailSubs"
+          required
+        />
+        <mat-error
+          *ngIf="
+            emailSubs?.hasError('email') && !emailSubs?.hasError('required')
+          "
+        >Please enter a valid <strong>email</strong> address</mat-error
+        >
+        <mat-error *ngIf="emailSubs?.hasError('required')"
+        >Email is <strong>required</strong></mat-error
+        >
+      </mat-form-field>
+
+      <!-- Password input -->
+      <mat-form-field class="form-group" appearance="fill">
+        <mat-label class="form-label" for="passwordSubs">
+          <i class="me-3"><mat-icon>lock</mat-icon></i> Password
+        </mat-label>
+        <input
+          matInput
+          type="password"
+          id="passwordSubs"
+          formControlName="passwordSubs"
+          [errorStateMatcher]="matcher"
+          [type]="'password'"
+          name="passwordSubs"
+          required
+        />
+        <mat-error
+          *ngIf="
+            passwordSubs?.hasError('minlength') &&
+            !passwordSubs?.hasError('required')
+          "
+        >Password must have
+          <strong
+          >{{passwordSubs?.errors?.['minlength'].requiredLength}}</strong
+          >
+          Letters, You have Submitted
+          <strong>{{passwordSubs?.errors?.['minlength'].actualLength}}</strong>
+          Letters</mat-error
+        >
+        <mat-error *ngIf="passwordSubs?.hasError('required')"
+        >Password is <strong>required</strong></mat-error
+        >
+      </mat-form-field>
+      <!-- Register Button -->
+      <div class="text-center">
+        <button type="submit">Register</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Sign in form container -->
+  <div class="form-container sign-in-container">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <!-- Social container -->
+      <div class="social-container">
+        <img src="../../../assets/Logo.png" height="100px" />
+      </div>
+
+      <!-- Email input -->
+      <mat-form-field class="form-group mb-3">
+        <mat-label class="form-label" for="Email">
+          <i class="me-3"><mat-icon>email</mat-icon></i> Email address
+        </mat-label>
+        <input
+          matInput
+          type="email"
+          id="email"
+          formControlName="email"
+          [errorStateMatcher]="matcher"
+          name="email"
+          required
+        />
+        <mat-error
+          *ngIf="email?.hasError('email') && !email?.hasError('required')"
+        >Please enter a valid <strong>email</strong> address</mat-error
+        >
+        <mat-error *ngIf="email?.hasError('required')"
+        >Email is <strong>required</strong></mat-error
+        >
+      </mat-form-field>
+
+      <!-- Password input -->
+      <mat-form-field class="form-group mb-3" appearance="fill">
+        <mat-label class="form-label" for="password">
+          <i class="me-3"><mat-icon>lock</mat-icon></i> Password
+        </mat-label>
+        <input
+          matInput
+          type="password"
+          id="password"
+          formControlName="password"
+          [errorStateMatcher]="matcher"
+          [type]="hide ? 'password' : 'text'"
+          name="password"
+          required
+        />
+        <button
+          type="button"
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+        <mat-error
+          *ngIf="
+            password?.hasError('minlength') && !password?.hasError('required')
+          "
+        >Password must have
+          <strong>{{password?.errors?.['minlength'].requiredLength}}</strong>
+          Letters, You have Submitted
+          <strong>{{password?.errors?.['minlength'].actualLength}}</strong>
+          Letters</mat-error
+        >
+        <mat-error *ngIf="password?.hasError('required')"
+        >Password is <strong>required</strong></mat-error
+        >
+      </mat-form-field>
+
+
+      <!-- Login Button -->
+      <div class="text-center">
+        <button mat-raised-button type="submit" color="warn">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Login &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Overlay container for switching between sign-in and sign-up -->
+  <div class="overlay-container">
+    <div class="overlay">
+      <!-- Left overlay panel -->
+      <div class="overlay-panel overlay-left">
+        <img
+          src="../../../assets/Logo.png"
+          style="height: 50px; margin-bottom: 20px"
+        />
+        <h1>Bienvenue à ELZEI</h1>
+        <p>Bienvenue sur notre plateforme</p>
+        <button class="ghost" id="signIn" (click)="active = ''">Sign In</button>
+      </div>
+      <!-- Right overlay panel -->
+      <div class="overlay-panel overlay-right">
+        <img
+          src="../../../assets/Logo.png"
+          style="height: 50px; margin-bottom: 20px"
+        />
+        <h1>Bienvenue à ELZEI</h1>
+        <p>Bienvenue sur notre plateforme</p>
+        <button
+          class="ghost"
+          id="signUp"
+          (click)="active = 'right-panel-active'"
+        >
+          Sign Up
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
